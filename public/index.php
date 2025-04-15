@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce</title>
+    <title>E-shop</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="query.css">
     <link rel="stylesheet" href="humberger.css">
@@ -55,8 +55,8 @@
         </form>
         
         <div class="links">
-            <a class="active hidden-tab"  href="#">HOME</a>
-            <a class="hidden-tab" href="products.html">PRODUCT</a>
+            <a class="active hidden-tab"  href="index.php">HOME</a>
+            <a class="hidden-tab" href="product.php">PRODUCT</a>
             <a class="hidden-tab" href="#">ABOUT</a>
             <a class="hidden-tab" href="#">CONTACT</a>
             <a class="hidden-tab3" href="#"><img src="./assets/icons/shop.png" alt=""></a>

@@ -19,7 +19,7 @@
         </form>
         <div class="links">
                 <a class="hidden-tab"  href="index.php">HOME</a>
-                <a class="active hidden-tab" href="products-detail.php">PRODUCT</a>
+                <a class="active hidden-tab" href="product.php">PRODUCT</a>
                 <a class="hidden-tab" href="#">ABOUT</a>
                 <a class="hidden-tab" href="#">CONTACT</a>
                 <a class="hidden-tab3" href="#"><img src="./assets/icons/shop.png" alt=""></a>
