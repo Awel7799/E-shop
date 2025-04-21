@@ -18,8 +18,8 @@
         <input type="search" placeholder="Search Products">
     </form>
     <div class="links">
-            <a class="hidden-tab"  href="index.html">HOME</a>
-            <a class="active hidden-tab" href="products.html">PRODUCT</a>
+            <a class="hidden-tab"  href="index.php">HOME</a>
+            <a class="active hidden-tab" href="products.php">PRODUCT</a>
             <a class="hidden-tab" href="#">ABOUT</a>
             <a class="hidden-tab" href="#">CONTACT</a>
             <a class="hidden-tab3" href="#"><img src="./assets/icons/shop.png" alt=""></a>
@@ -65,7 +65,7 @@
 
             <div class="item-cards">
 
-                <a href="product-detail.html"><img src="./assets/images/bag.png" alt=""></a>
+                <a href="product-detail.php"><img src="./assets/images/bag.png" alt=""></a>
                 <span class="item-name">CHANEL Mini flap bag</span>
                 
                 <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
