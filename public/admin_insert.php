@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = ""; // Laragon has no default password
-$dbname = "Eshop"; // replace with your actual DB name
+$dbname = "eshopdb"; // replace with your actual DB name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,7 +17,7 @@ $adminUsername = "111";
 $adminPassword = password_hash("123", PASSWORD_DEFAULT); // Securely hashed password
 
 // Insert into table
-$sql = "INSERT INTO admin (password , username) VALUES (?, ?)";
+$sql = "INSERT INTO admin (`username`, `password`) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $adminUsername, $adminPassword);
 
