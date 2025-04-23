@@ -15,35 +15,33 @@ else {
     echo "✅ Database connection successful!";
 }
 
-// Get form values
+// Get values from form and store them in variables
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+// Display for testing (remove this in production)
+echo "Username: " . $username . "<br>";
+echo "Password: " . $password;
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-// Prepare query to find the user
-$sql = "SELECT * FROM admin WHERE username = ?";
+// Prepare and bind the SQL statement
+$sql = "INSERT INTO admin (username, password) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
+$stmt->bind_param("ss", $username, $hashedPassword);
 
-$result = $stmt->get_result();
 
-if ($result->num_rows === 1) {
-    $row = $result->fetch_assoc();
-    
-    // Verify password
-    if (password_verify($password, $row['password'])) {
-        // Success — redirect to dashboard
-        header("Location: ../admin/index.php");
+// Execute and check for success
+if ($stmt->execute()) {
+    header("Location: login_page.php");
         exit();
-    } else {
-        echo "❌ Incorrect password.";
-    }
 } else {
-    echo "❌ Username not found.";
+    echo "❌ Error: " . $stmt->error;
 }
 
+// Close statement and connection
 $stmt->close();
 $conn->close();
 
 ?>
+
+
