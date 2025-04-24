@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";      // usually localhost
 $dbUsername = "root";           // your DB username
-$dbPassword = "";               // your DB password
-$dbName = "eshopdb"; // replace with your database name
+$dbPassword = "bUZweTz8ms_V&w/";               // your DB password
+$dbName = "ecommerce_db"; // replace with your database name
 
 // Create connection
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);

@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>Admin Login</h2>
-  <form action="login.php" method="POST">
-    <label>Username:</label>
-    <input type="text" name="username" required><br><br>
-
-    <label>Password:</label>
-    <input type="password" name="password" required><br><br>
-
-    <button type="submit">Login</button>
-  </form>
+    <div class="container">
+        <div class="card">
+            <h2>Admin Login</h2>
+            <form action="login.php" method="POST">
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p class="link">Don't have an account? <a href="signup.php">Sign up</a></p>
+        </div>
+    </div>
 </body>
 </html>
