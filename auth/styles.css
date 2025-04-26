@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
+    background-color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +18,10 @@ body {
 }
 
 .card {
-    background: #fff5e1;
+    background: #fff8e7;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 255, 136, 0.1);
     width: 100%;
     max-width: 400px;
     text-align: center;
@@ -34,7 +34,7 @@ body {
 
 h2 {
     margin-bottom: 30px;
-    color: #333;
+    color: #222;
     font-size: 24px;
     font-weight: 600;
 }
@@ -47,7 +47,7 @@ h2 {
 label {
     display: block;
     margin-bottom: 8px;
-    color: #555;
+    color: #444;
     font-size: 14px;
     font-weight: 500;
 }
@@ -55,7 +55,7 @@ label {
 input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     background-color: #ffffff;
@@ -64,35 +64,37 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #d4a373;
-    box-shadow: 0 0 5px rgba(212, 163, 115, 0.3);
+    border-color: #00ff88;
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
 }
 
 .btn {
     width: 100%;
     padding: 12px;
-    background-color: #d4a373;
+    background-color: #00ff88;
     border: none;
     border-radius: 5px;
-    color: #ffffff;
+    color: #000000;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
 
 .btn:hover {
-    background-color: #b8860b;
+    background-color: #00cc70;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
 }
 
 .link {
     margin-top: 20px;
     font-size: 14px;
-    color: #555;
+    color: #444;
 }
 
 .link a {
-    color: #d4a373;
+    color: #00ff88;
     text-decoration: none;
     font-weight: 500;
 }

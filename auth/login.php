@@ -2,7 +2,7 @@
 $servername = "localhost";      // usually localhost
 $dbUsername = "root";           // your DB username
 $dbPassword = "bUZweTz8ms_V&w/";               // your DB password
-$dbName = "ecommerce_db"; // replace with your database name
+$dbName = "eshop"; // replace with your database name
 
 // Create connection
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
@@ -15,35 +15,33 @@ else {
     echo "✅ Database connection successful!";
 }
 
-// Get form values
-$username = $_POST['username'];
-$password = $_POST['password'];
+// Check if form data exists first to avoid undefined warnings
+if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
+    // get value from the form
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password']; // don't forget password
+}
+// Search for the user with that email
+$sql = "SELECT * FROM users WHERE email = '$email'";
+$result = $conn->query($sql);
 
-
-// Prepare query to find the user
-$sql = "SELECT * FROM admin WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-
-$result = $stmt->get_result();
-
-if ($result->num_rows === 1) {
+if ($result->num_rows > 0) {
+    // Email found
     $row = $result->fetch_assoc();
-    
-    // Verify password
-    if (password_verify($password, $row['password'])) {
-        // Success — redirect to dashboard
-        header("Location: ../admin/index.php");
-        exit();
+    $stored_password = $row['password']; // password from DB
+
+    // Compare passwords
+    if ($password === $stored_password) {
+        header("Location:../admin/index.php");
     } else {
-        echo "❌ Incorrect password.";
+        header("Location: login_page.php?error=incorrect_password");
+        exit();
     }
 } else {
-    echo "❌ Username not found.";
+    header("Location: login_page.php?error=No user found with that email");
+    exit();
 }
 
-$stmt->close();
 $conn->close();
-
 ?>

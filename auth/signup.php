@@ -12,11 +12,15 @@
             <h2>Admin Signup</h2>
             <form action="signup_process.php" method="POST">
                 <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="username">Name:</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div class="input-group">
-                    <label for="password">Password:</label>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn">Signup</button>

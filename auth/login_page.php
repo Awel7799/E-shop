@@ -12,12 +12,19 @@
             <h2>Admin Login</h2>
             <form action="login.php" method="POST">
                 <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="username">name:</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div class="input-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
+                    <?php if (isset($_GET['error']) && $_GET['error'] === 'incorrect_password') { ?>
+                        <p class="error">Incorrect password. Please try again.</p>
+                    <?php } ?>
+                </div>
+                <div class="input-group">
+                    <label for="email">email:</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <button type="submit" class="btn">Login</button>
             </form>
