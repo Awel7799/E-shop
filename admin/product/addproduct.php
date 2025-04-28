@@ -15,7 +15,6 @@
             height: 100vh;
             margin: 0;
         }
-
         .form-container {
             background-color: #2a2a2a;
             padding: 2rem;
@@ -92,7 +91,7 @@
 <body>
     <div class="form-container">
         <h2>Product Input Form</h2>
-        <form action="addProduct_to_db.php" method="post" enctype="multipart/form-data">
+        <form action="addProductdb.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="productName">Product Name</label>
                 <input type="text" id="productName" name="productName" required>
@@ -104,6 +103,14 @@
             <div class="form-group">
                 <label for="image">Product Image</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Product quantity</label>
+                <input type="int" id="quantity" name="quantity"  required>
+            </div>
+            <div class="form-group">
+                <label for="catagory">Product catagory </label>
+                <input type="text" id="catagory" name="catagory"  required>
             </div>
             <button type="submit" name="submit">Submit</button>
         </form>

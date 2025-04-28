@@ -1,0 +1,144 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #121212;
+  color: #f1f1f1;
+  padding: 20px;
+}
+
+/* User Section */
+.user-section {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.add-user-btn {
+  background-color: #1f1f1f;
+  color: #00ffea;
+  border: 2px solid #00ffea;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-shadow: 0 0 5px #00ffea;
+  box-shadow: 0 0 8px #00ffea, 0 0 15px #00ffea inset;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.add-user-btn:hover {
+  background-color: #00ffea;
+  color: #121212;
+  box-shadow: 0 0 15px #00ffea, 0 0 30px #00ffea;
+}
+
+/* User Cards */
+.user-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+}
+
+.user-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 2px solid #00ffea;
+}
+
+.user-card h2 {
+  font-size: 20px;
+  color: #e0e0e0;
+  margin-bottom: 8px;
+}
+
+.status {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.status.active {
+  color: #00ff00;
+}
+
+.status.inactive {
+  color: #ff3333;
+}
+
+/* Card Buttons */
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: 2px solid;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* Edit Button */
+.edit-btn {
+  color: #00bfff;
+  border-color: #00bfff;
+  text-shadow: 0 0 5px #00bfff;
+  box-shadow: 0 0 8px #00bfff inset;
+}
+
+.edit-btn:hover {
+  background-color: #00bfff;
+  color: #121212;
+  box-shadow: 0 0 12px #00bfff, 0 0 24px #00bfff;
+}
+/* Delete Button */
+.delete-btn {
+  color: #ff4c4c;
+  border-color: #ff4c4c;
+  text-shadow: 0 0 5px #ff4c4c;
+  box-shadow: 0 0 8px #ff4c4c inset;
+}
+
+.delete-btn:hover {
+  background-color: #ff4c4c;
+  color: #121212;
+  box-shadow: 0 0 12px #ff4c4c, 0 0 24px #ff4c4c;
+}

@@ -1,0 +1,73 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #f1f1f1;
+    padding: 20px;
+  }
+  .order-section {
+    max-width: 1300px;
+    margin: auto;
+  }
+  
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .order-header h2 {
+    font-size: 32px;
+    color: #ffffff;
+  }
+  
+  .order-count {
+    background-color: #1f1f1f;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #00ffea;
+    color: #00ffea;
+    font-size: 18px;
+    box-shadow: 0 0 10px #00ffea;
+  }
+  
+  .order-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  
+  .order-card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    text-align: center;
+  }
+  
+  .order-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #00ffea;
+  }
+  
+  .order-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .order-card .price {
+    font-size: 16px;
+    color: #00ffea;
+  }
+  

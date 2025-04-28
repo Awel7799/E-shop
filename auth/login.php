@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
 
     // Compare passwords
     if ($password === $stored_password) {
-        header("Location:../admin/index.php");
+        header("Location:../admin/dashboard/index.php");
     } else {
         header("Location: login_page.php?error=incorrect_password");
         exit();

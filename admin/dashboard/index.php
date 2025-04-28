@@ -13,9 +13,9 @@
       <h2>Admin</h2>
       <nav>
         <a href="#">Dashboard</a> <br>
-        <a href="#">Users</a> <br>
-        <a href="addproduct.php">Products</a> <br>
-        <a href="#">Orders</a> <br>
+        <a href="../userMngmt/user.php">Users</a> <br>
+        <a href="../product/product.php">Products</a> <br>
+        <a href="../ordereditem/order.php">Orders</a> <br>
         <a href="#">Reports</a> <br>
         <a href="#">Settings</a>
       </nav>
