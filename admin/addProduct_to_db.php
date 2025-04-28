@@ -14,37 +14,28 @@ if ($conn->connect_error) {
 else{
   echo"database conneced";
 }
-// Step 2: Get form data
-$name = $_POST['name'];
-$price = $_POST['price'];
-$imageName = $_FILES['image']['name'];
-$imageTmp = $_FILES['image']['tmp_name'];
-
-// Step 3: Move uploaded image to a folder
-$targetDir = "uploads/";
-if (!is_dir($targetDir)) {
-  mkdir($targetDir);
-}
-$imagePath = $targetDir . basename($imageName);
-
-if (move_uploaded_file($imageTmp, $imagePath)) {
-  
-  // Step 4: Insert into database (assuming user_id is known, e.g., 1 for admin)
-  $user_id = 1; // example admin ID
-
-  $stmt = $conn->prepare("INSERT INTO products (name, price, image, user_id) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("sdsi", $name, $price, $imagePath, $user_id);
-
-  if ($stmt->execute()) {
-    echo "Product added successfully!";
+// check if the form was submitted
+// When the form is submitted
+if (isset($_POST['submit'])){
+  if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    // get image the from the html form and store it on a variable
+    $productImage = file_get_contents($_FILES['image']['tmp_name']);
+     $productname= $_POST['productName'];
+     $productprice= $_POST['price'];
+   // Escape the data for safe insertion into SQL
+    $productImage = $conn->real_escape_string($productImage);
+    
+       // Insert into database
+       $sql = "INSERT INTO products (image,name , price) VALUES ('$productImage','$productname','$productprice')";
+      
+       if ($conn->query($sql) === TRUE) {
+        echo "Image uploaded and saved in database successfully.";
+    } else {
+        echo "Error: " . $conn->error;
+    }
   } else {
-    echo "Error: " . $stmt->error;
-  }
-
-  $stmt->close();
-} else {
-  echo "Failed to upload image.";
+    echo "No image uploaded or there was an error.";
 }
-
+}
 $conn->close();
 ?>
