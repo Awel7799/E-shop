@@ -13,23 +13,43 @@
     <section class="section">
       <div class="section-header">
         <h2>All Products</h2>
-        <button class="glow-btn"> <a href="addproduct.php"></a> + Add Product</button>
+        <button class="glow-btn"> <a href="addproduct.php"> + Add Product</a></button>
       </div>
 
       <div class="product-cards">
-        <div class="product-card">
-          <img src="https://via.placeholder.com/100" alt="Product Image">
-          <h3>Product Name</h3>
-          <p class="price">$29.99</p>
-          <button class="delete-btn">Delete</button>
-        </div>
+      <?php
+         $servername = "localhost";      // usually localhost
+         $dbUsername = "root";           // your DB username
+         $dbPassword = "bUZweTz8ms_V&w/";               // your DB password
+         $dbName = "eshop"; // replace with your database name
 
-        <div class="product-card">
-          <img src="https://via.placeholder.com/100" alt="Product Image">
-          <h3>Product Name</h3>
-          <p class="price">$49.99</p>
-          <button class="delete-btn">Delete</button>
-        </div>
+        // Create connection
+         $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
+
+        // Check connection
+       if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+           }
+      // Fetch products
+      $sql = "SELECT * FROM products";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo '<div class="product-card">';
+          echo '<img src="' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+          echo '<h3>' . htmlspecialchars($row["name"]) . '</h3>';
+          echo '<p class="price">$' . htmlspecialchars($row["price"]) . '</p>';
+          echo '<a href="delete.php?product_id=' . $row["product_id"] . '" onclick="return confirm(\'Are you sure you want to delete this product?\')" class="delete-btn">Delete</a>';
+
+          echo '</div>';
+        }
+      } else {
+        echo '<p>No products found.</p>';
+      }
+
+      $conn->close();
+    ?>
 
         <!-- More product cards -->
       </div>

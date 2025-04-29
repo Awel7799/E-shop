@@ -11,9 +11,6 @@ $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-else {
-    echo "✅ Database connection successful!";
-}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Get product name and price from the form
@@ -43,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES ('$productName', '$productPrice', '$uploadPath','$productquantity','$productcatagory')";
 
             if (mysqli_query($conn, $sql)) {
-                echo "Product added successfully!";
+                header("Location:  product.php");
             } else {
                 echo "Error adding product: " . mysqli_error($conn);
             }
