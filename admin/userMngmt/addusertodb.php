@@ -13,10 +13,9 @@ if ($conn->connect_error) {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get product name and price from the form
-    $productName = mysqli_real_escape_string($conn, $_POST['productName']);
-    $productPrice = mysqli_real_escape_string($conn, $_POST['price']);
-    $productquantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-    $productcatagory = mysqli_real_escape_string($conn, $_POST['catagory']);
+    $fullName = mysqli_real_escape_string($conn, $_POST['Name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $Password = mysqli_real_escape_string($conn, $_POST['password']);
 
     // Handle the uploaded image
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -35,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($imageTmpName, $uploadPath)) {
 
             // Now insert into the database (store the file path)
-            $sql = "INSERT INTO products (name,price ,image,stock_quantity,category) 
-                    VALUES ('$productName', '$productPrice', '$uploadPath','$productquantity','$productcatagory')";
+            $sql = "INSERT INTO users (name,email ,image,password) 
+                    VALUES ('$fullName', '$email', '$uploadPath','$Password')";
 
             if (mysqli_query($conn, $sql)) {
-                header("Location:  product.php");
+                header("Location:  user.php");
             } else {
                 echo "Error adding product: " . mysqli_error($conn);
             }

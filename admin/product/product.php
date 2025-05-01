@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="product-section">
-
+    
     <!-- All Products Area -->
     <section class="section">
       <div class="section-header">
@@ -18,10 +18,10 @@
 
       <div class="product-cards">
       <?php
-         $servername = "localhost";      // usually localhost
-         $dbUsername = "root";           // your DB username
-         $dbPassword = "bUZweTz8ms_V&w/";               // your DB password
-         $dbName = "eshop"; // replace with your database name
+         $servername = "localhost";     
+         $dbUsername = "root";           
+         $dbPassword = "bUZweTz8ms_V&w/";              
+         $dbName = "eshop"; 
 
         // Create connection
          $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
@@ -79,7 +79,7 @@
       // Fetch products
       $sql = "SELECT * FROM featuredProduct";
       $result = $conn->query($sql);
-
+    
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           echo '<div class="product-card">';
