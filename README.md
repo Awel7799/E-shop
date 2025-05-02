@@ -1,6 +1,8 @@
 E-Shop 🛍️
 
 A modern online marketplace connecting sellers and buyers for clothing, bags, shoes, and more!
+
+
 📌 Table of Contents
 
     Features
