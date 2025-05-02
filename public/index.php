@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-shop</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="homepagestyle.css">
     <link rel="stylesheet" href="query.css">
     <link rel="stylesheet" href="humberger.css">
 </head>
@@ -83,31 +83,42 @@
     <h1 class="line">Featured Products</h1>
 
     <div class="list wrap">
-        <div class="item-cards"> 
-            <img src="./assets/images/bag.png" alt="">
+        
+        <?php
+         $servername = "localhost";      // usually localhost
+         $dbUsername = "root";           // your DB username
+         $dbPassword = "bUZweTz8ms_V&w/";               // your DB password
+         $dbName = "eshop"; // replace with your database name
 
-            <div class="top">CHANEL Mini flap bag</div>
-            <div class="middle">Lambskin & gold-tone metal, black</div>
-            <div class="bottom"><p><span>9900000</span> MMK</p> <button>+</button></div>
-        </div>
+        // Create connection
+         $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
 
-        <div class="item-cards"> 
-            <img src="./assets/images/allstr.png" alt="">
+        // Check connection
+       if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+           }
+      // Fetch products
+      $sql = "SELECT * FROM featuredProduct";
+      $result = $conn->query($sql);
+    
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo '<div class="item-cards">';
+          echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+          echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
+          echo '<div class="item-cards-price">';
+          echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
+          echo '<button>+</button>';
+          echo '</div>';
+          echo '</div>';
+        }
+      } else {
+        echo '<p>No products found.</p>';
+      }
 
-            <div class="top">Converse Shoes</div>
-            <div class="middle">
-                Chuck Tylor All Star Trek <br>
-            </div>
-            <div class="bottom"><p><span>5400000</span> MMK</p>  <button>+</button></div>
-        </div>
-
-        <div class="item-cards"> 
-            <img src="./assets/images/hoodie.png" alt="">
-
-            <div class="top">Essential Hoodie</div>
-            <div class="middle">Buttercream Essential Hoodie</div>
-            <div class="bottom"><p><span>3700000</span> MMK</p> <button>+</button></div>
-        </div>
+      $conn->close();
+    ?>
+       
     </div>
 
 </section>

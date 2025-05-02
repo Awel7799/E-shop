@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="product.css">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="homepagestyle.css">
     <link rel="stylesheet" href="query.css">
 </head>
 <body>
@@ -61,6 +61,67 @@
 
         </div>
 
+
+
+
+
+
+        <section class="featured-products">
+    <h1 class="line">Featured Products</h1>
+
+    <div id="list" class="list wrap">
+        
+        <?php
+         $servername = "localhost";      // usually localhost
+         $dbUsername = "root";           // your DB username
+         $dbPassword = "bUZweTz8ms_V&w/";               // your DB password
+         $dbName = "eshop"; // replace with your database name
+
+        // Create connection
+         $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
+
+        // Check connection
+       if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+           }
+      // Fetch products
+      $sql = "SELECT * FROM featuredProduct";
+      $result = $conn->query($sql);
+    
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo '<div class="item-cards">';
+          echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+          echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
+          echo '<div class="item-cards-price">';
+          echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
+          echo '<button>+</button>';
+          echo '</div>';
+          echo '</div>';
+        }
+      } else {
+        echo '<p>No products found.</p>';
+      }
+
+      $conn->close();
+    ?>
+       
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
         <section>
 
             <div class="item-cards">
@@ -71,7 +132,7 @@
                 <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
 
             </div>
-
+   
             <div class="item-cards">
 
                 <img src="./assets/images/allstr.png" alt="">
@@ -100,10 +161,6 @@
             </div>
 
 
-        <!-- </section> -->
-
-
-        <!-- <section> -->
 
             <div class="item-cards">
 
@@ -142,10 +199,7 @@
             </div>
 
 
-        <!-- </section> -->
-
-
-        <!-- <section> -->
+       
 
             <div class="item-cards">
 
@@ -184,10 +238,7 @@
             </div>
 
 
-        <!-- </section> -->
-
-
-        <!-- <section> -->
+     
 
             <div class="item-cards">
 
@@ -226,10 +277,7 @@
             </div>
 
 
-        <!-- </section> -->
-
-
-        <!-- <section> -->
+     
 
             <div class="item-cards">
 
@@ -268,7 +316,7 @@
             </div>
 
 
-        </section>
+        </section> -->
 
         <button class="b1"><</button>
         <button class="bn">1</button>
