@@ -61,7 +61,7 @@
             <a class="hidden-tab" href="#">CONTACT</a>
             <a class="hidden-tab3" href="#"><img src="./assets/icons/shop.png" alt=""></a>
             <a class="hidden-tab3" href=" ../auth/signup.php"><img src="./assets/icons/person.png" alt=""><p>Admin</p></a>
-            <a class="hidden-tab3" href="#"><img src="./assets/icons/person.png" alt=""><p>Seller</p></a>
+            <a class="hidden-tab3" href=" ../seller/login.php"><img src="./assets/icons/person.png" alt=""><p>Seller</p></a>
         </div>   
     </header>
 
