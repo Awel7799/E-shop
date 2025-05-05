@@ -4,8 +4,8 @@ session_start();
 // Database configuration
 $host = "localhost";
 $user = "root";
-$password = "1394"; // Replace with your actual MySQL password
-$database = "seller";
+$password = "bUZweTz8ms_V&w/"; // Replace with your actual MySQL password
+$database = "eshop";
 
 // Create a new MySQLi connection
 $conn = new mysqli($host, $user, $password, $database);

@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "1394"; // Replace with your actual MySQL password
-$database = "seller";
+$password = "bUZweTz8ms_V&w/"; // Replace with your actual MySQL password
+$database = "Eshop";
 
 // Create connection
 $conn = new mysqli($host, $user, $password, $database);
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check for existing username or email
     if (empty($errors)) {
-        $stmt = $conn->prepare("SELECT id FROM sellers WHERE username = ? OR email = ?");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE name = ? OR email = ?");
         $stmt->bind_param("ss", $username, $email);
         $stmt->execute();
         $stmt->store_result();

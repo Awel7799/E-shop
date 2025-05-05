@@ -3,6 +3,24 @@
 
 <script>
 
+function addToCart(id, name, price, image) {
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("name", name);
+  formData.append("price", price);
+  formData.append("image", image);
+
+  fetch("add_to_cart.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert(data);
+    loadCartCount(); // refresh cart count
+  });
+}
+
     function myFunction(){
         document.getElementById('side-bar-top').style.display='none';
         document.getElementById('side-bar').style.display='none';
@@ -57,9 +75,9 @@
         <div class="links">
             <a class="active hidden-tab"  href="index.php">HOME</a>
             <a class="hidden-tab" href="product.php">PRODUCT</a>
-            <a class="hidden-tab" href="#">ABOUT</a>
-            <a class="hidden-tab" href="#">CONTACT</a>
-            <a class="hidden-tab3" href="#"><img src="./assets/icons/shop.png" alt=""></a>
+            <a class="hidden-tab" href="#footer">ABOUT</a>
+            <a class="hidden-tab" href="#footer">CONTACT</a>
+            <a class="hidden-tab3" href="cart.php"><img src="./assets/icons/shop.png" alt=""></a>
             <a class="hidden-tab3" href=" ../auth/signup.php"><img src="./assets/icons/person.png" alt=""><p>Admin</p></a>
             <a class="hidden-tab3" href=" ../seller/login.php"><img src="./assets/icons/person.png" alt=""><p>Seller</p></a>
         </div>   
@@ -104,11 +122,16 @@
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           echo '<div class="item-cards">';
-          echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
-          echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
-          echo '<div class="item-cards-price">';
-          echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
-          echo '<button>+</button>';
+               echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+               echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
+               echo '<div class="item-cards-price">';
+               echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
+               echo '<button onclick="addToCart(' 
+                   . htmlspecialchars($row["id"]) . ', '
+                   . '\'' . addslashes($row["name"]) . '\', '
+                   . htmlspecialchars($row["price"]) . ', '
+                   . '\'' . addslashes($row["image"]) . '\')">+</button>';
+     
           echo '</div>';
           echo '</div>';
         }
@@ -165,7 +188,7 @@
 
 </section>
 
-<footer>
+<footer id="footer">
     <div class="top wrap2">
 
         <div class="f-logo hidden-tab">

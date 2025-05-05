@@ -16,8 +16,8 @@ $success_msg = $error_msg = '';
 // Database configuration
 $host = "localhost";
 $user = "root";
-$password = "1394"; // Replace with your actual password
-$database = "seller"; // Replace with your actual database name
+$password = "bUZweTz8ms_V&w/"; // Replace with your actual password
+$database = "eshop"; // Replace with your actual database name
 
 // Create a new MySQLi connection
 $conn = new mysqli($host, $user, $password, $database);
