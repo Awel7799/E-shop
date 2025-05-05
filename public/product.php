@@ -13,9 +13,9 @@
 <header class="product-header">
     <div class="logo-text">E-SHOP</div>
 
-    <form action="">
+    <form action=""  method="GET">
         <button><img src="icons/search.png" alt=""></button>
-        <input type="search" placeholder="Search Products">
+        <input type="text" name="search" placeholder="Search Products">
     </form>
     <div class="links">
             <a class="hidden-tab"  href="index.php">HOME</a>
@@ -33,14 +33,14 @@
         <section class="categories">
             <h2 class="line">Categories</h2>
             <ul>
-                <li>Clothes</li>
-                <li>Watches</li>
-                <li>Bags</li>
-                <li>Glasses</li>
-                <li>Cosmetics</li>
-                <li>Perfumes</li>
-                <li>Footwear</li>
-            </ul>
+            <li><a href="?category=Clothes">Clothes</a></li>
+            <li><a href="?category=Watches">Watches</a></li>
+            <li><a href="?category=Bags">Bags</a></li>
+            <li><a href="?category=Glasses">Glasses</a></li>
+            <li><a href="?category=Cosmetics">Cosmetics</a></li>
+            <li><a href="?category=Perfumes">Perfumes</a></li>
+            <li><a href="?category=Footwear">Footwear</a></li>
+        </ul>
         </section>
 
     </div>
@@ -84,10 +84,32 @@
        if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
            }
+
+
+           $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+           $search = htmlspecialchars($search); // prevent XSS
+     
+                  // Get the selected category if it exists
+        $category = isset($_GET['category']) ? $_GET['category'] : '';
+
+        // Base query
+        $sql = "SELECT * FROM featuredProduct WHERE 1=1";
       // Fetch products
       $sql = "SELECT * FROM featuredProduct";
       $result = $conn->query($sql);
-    
+      
+      if ($search !== '') {
+        // If search term is entered
+        $stmt = $conn->prepare("SELECT * FROM featuredProduct WHERE name LIKE ?");
+        $likeSearch = '%' . $search . '%';
+        $stmt->bind_param("s", $likeSearch);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    } else {
+        // If no search term, show all products
+        $result = $conn->query("SELECT * FROM featuredProduct");
+    }    
+
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           echo '<div class="item-cards">';
@@ -100,14 +122,21 @@
           echo '</div>';
         }
       } else {
-        echo '<p>No products found.</p>';
+        echo "<p style='margin: 20px; color: red;'>No products found for: <strong>" . $search . "</strong></p>";
+        if ($search !== '') {
+            echo " for: <strong>" . $search . "</strong>";
+        }
+        if ($category !== '') {
+            echo " in the <strong>" . $category . "</strong> category";
+        }
+        echo "</p>";
       }
 
       $conn->close();
     ?>
        
     </div>
-
+    <a href="product.php" class="back-btn">Back to All Products</a>
 </section>
 
 
