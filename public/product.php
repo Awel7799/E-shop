@@ -47,305 +47,79 @@
 
 
 
-    <div class="right">
-
+<div class="right">
         <h1><span class="line">All Products</span></h1>
-
-        <div class="sort">
-
-            <form action="">
-                <select name="" id="">
-                    <option>Sort by Price</option>
-                </select>
-            </form>
-
-        </div>
-
-
-
-
-
-
-        <section class="featured-products">
+<section class="featured-products">
     <h1 class="line">Featured Products</h1>
 
     <div id="list" class="list wrap">
         
-        <?php
-         $servername = "localhost";      // usually localhost
-         $dbUsername = "root";           // your DB username
-         $dbPassword = "bUZweTz8ms_V&w/";               // your DB password
-         $dbName = "eshop"; // replace with your database name
+    <?php
+$servername = "localhost";
+$dbUsername = "root";
+$dbPassword = "bUZweTz8ms_V&w/";
+$dbName = "eshop";
 
-        // Create connection
-         $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
+// Create connection
+$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
 
-        // Check connection
-       if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-           }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$category = isset($_GET['category']) ? trim($_GET['category']) : '';
 
-           $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-           $search = htmlspecialchars($search); // prevent XSS
-     
-                  // Get the selected category if it exists
-        $category = isset($_GET['category']) ? $_GET['category'] : '';
+if ($search !== '') {
+    // Search by name
+    $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
+    $likeSearch = '%' . $search . '%';
+    $stmt->bind_param("s", $likeSearch);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} elseif ($category !== '') {
+    // Filter by category
+    $stmt = $conn->prepare("SELECT * FROM products WHERE category = ?");
+    $stmt->bind_param("s", $category);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    // Show all products
+    $result = $conn->query("SELECT * FROM products");
+}
 
-        // Base query
-        $sql = "SELECT * FROM featuredProduct WHERE 1=1";
-      // Fetch products
-      $sql = "SELECT * FROM featuredProduct";
-      $result = $conn->query($sql);
-      
-      if ($search !== '') {
-        // If search term is entered
-        $stmt = $conn->prepare("SELECT * FROM featuredProduct WHERE name LIKE ?");
-        $likeSearch = '%' . $search . '%';
-        $stmt->bind_param("s", $likeSearch);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    } else {
-        // If no search term, show all products
-        $result = $conn->query("SELECT * FROM featuredProduct");
-    }    
+// Display products
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="item-cards">';
+        echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+        echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
+        echo '<div class="item-cards-price">';
+        echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
+        echo '<button>+</button>';
+        echo '</div>';
+        echo '</div>';
+    }
+} else {
+    echo "<p style='margin: 20px; color: red;'>No products found";
+    if ($search !== '') {
+        echo " for: <strong>" . $search . "</strong>";
+    }
+    if ($category !== '') {
+        echo " in the <strong>" . $category . "</strong> category";
+    }
+    echo ".</p>";
+}
 
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          echo '<div class="item-cards">';
-          echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
-          echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
-          echo '<div class="item-cards-price">';
-          echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
-          echo '<button>+</button>';
-          echo '</div>';
-          echo '</div>';
-        }
-      } else {
-        echo "<p style='margin: 20px; color: red;'>No products found for: <strong>" . $search . "</strong></p>";
-        if ($search !== '') {
-            echo " for: <strong>" . $search . "</strong>";
-        }
-        if ($category !== '') {
-            echo " in the <strong>" . $category . "</strong> category";
-        }
-        echo "</p>";
-      }
+$conn->close();
+?>
 
-      $conn->close();
-    ?>
        
     </div>
     <a href="product.php" class="back-btn">Back to All Products</a>
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-<!--
-        <section>
-
-            <div class="item-cards">
-
-                <a href="product-detail.php"><img src="./assets/images/bag.png" alt=""></a>
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-   
-            <div class="item-cards">
-
-                <img src="./assets/images/allstr.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/hoodie.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/perfume.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-
-
-            <div class="item-cards">
-
-                <img src="./assets/images/hat.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/watch.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/bag.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/allstr.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-
-       
-
-            <div class="item-cards">
-
-                <img src="./assets/images/bag.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/allstr.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/hoodie.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/perfume.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-
-     
-
-            <div class="item-cards">
-
-                <img src="./assets/images/hat.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/watch.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/bag.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/allstr.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-
-     
-
-            <div class="item-cards">
-
-                <img src="./assets/images/bag.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/allstr.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/hoodie.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-            <div class="item-cards">
-
-                <img src="./assets/images/perfume.png" alt="">
-                <span class="item-name">CHANEL Mini flap bag</span>
-                
-                <div class="price"><p><span>9900000</span> MMk</p><button class="add-to-cart">+</button> </div>
-
-            </div>
-
-
-        </section> -->
 
         <button class="b1"><</button>
         <button class="bn">1</button>

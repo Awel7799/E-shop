@@ -32,8 +32,8 @@ body{
 }
 
 .body .left .categories{
-    position: absolute;
-    top: 500px;
+    position: fixed;
+    top: 200px;
     width: 75%;
     /* background-color: blue; */
     border-top-right-radius: 100Px;

@@ -6,7 +6,6 @@
     box-sizing: border-box;
 }
 
-
 body{
     position: relative;
     width: 100vw;
@@ -181,8 +180,9 @@ header .links{
 
 .featured-products{
     margin:  4% 0;
-    height: auto;
+    height: 1000px;
     width: 100vw;
+    
 }
 
 .featured-products h1{
@@ -195,7 +195,7 @@ header .links{
     text-align: left;
 
 }
-/*
+
 .featured-products .list{
     border: 1px solid black;
     flex-wrap: wrap;
@@ -256,9 +256,10 @@ header .links{
 .featured-products .list .item-cards .bottom span{
     color: #A51910;
 }
-*/
+
 /* Container */
 #list{
+    border: 2px solid rgb(194, 22, 22);
     position: relative;
     left: -300px;
     width: 80%;
@@ -278,7 +279,7 @@ header .links{
     max-width: calc(33.3% - 24px);
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(199, 15, 15, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
     display: flex;
