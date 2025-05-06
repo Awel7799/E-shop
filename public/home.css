@@ -152,7 +152,7 @@ header .links{
     margin-bottom: 4%;
 }
 
-.eshop .eshop-body .eshop-body-text button{
+.eshop .eshop-body .eshop-body-text button {
     position: relative;
     padding-right: 7%;
     font-weight: 700;
@@ -164,7 +164,9 @@ header .links{
     background-color: #A51910;
     color: #fff;
 }
-
+.eshop .eshop-body .eshop-body-text button a{
+    text-decoration: none;
+}
 
 .eshop .eshop-body div button img{
     position: absolute;

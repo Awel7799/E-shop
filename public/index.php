@@ -32,7 +32,7 @@ function addToCart(id, name, price, image) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-shop</title>
-    <link rel="stylesheet" href="homepagestyles.css">
+    <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="query.css">
     <link rel="stylesheet" href="humberger.css">
 </head>
@@ -67,10 +67,7 @@ function addToCart(id, name, price, image) {
         
         <div class="logo-text">E-SHOP</div>
 
-        <form action="">
-            <button><img src="./assets/icons/search.png" alt=""></button>
-            <input type="search" placeholder="Search Products">
-        </form>
+        
         
         <div class="links">
             <a class="active hidden-tab"  href="index.php">HOME</a>
@@ -89,7 +86,7 @@ function addToCart(id, name, price, image) {
             <p>Success isn't always about greatness. It's about consistancy. Consistent
                 <br>hard work gains success. Greatness will come.
             </p>
-            <button>Explore Now <img src="././assets/icons/arrow1.png" alt=""></button>
+            <button><a href="product.php">Explore Now </a><img src="././assets/icons/arrow1.png" alt=""></button>
         </div>
         <img class="hidden-tab2" src="./assets/images/women.png" alt="">
     </span>

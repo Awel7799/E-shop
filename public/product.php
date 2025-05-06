@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="products.css">
-    <link rel="stylesheet" href="homepagestyles.css">
+    <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="query.css">
 </head>
 <body>
@@ -32,6 +32,7 @@
         <section class="categories">
             <h2 class="line">Categories</h2>
             <ul>
+            <li><a href="product.php">All product</a></li>
             <li><a href="?category=Clothes">Clothes</a></li>
             <li><a href="?category=Watches">Watches</a></li>
             <li><a href="?category=Bags">Bags</a></li>

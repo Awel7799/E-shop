@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
     // Delete query
-    $sql = "DELETE FROM users WHERE id = $id";
+    $sql = "DELETE FROM sellers WHERE id = $id";
 
     if ($conn->query($sql) === TRUE) {
         // Redirect back to the dashboard after deletion

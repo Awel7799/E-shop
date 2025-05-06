@@ -12,6 +12,7 @@
     <!-- All Products Area -->
     <section class="section">
       <div class="section-header">
+        <button class="back-btn"><a href="../dashboard/index.php">BACK</a></button>
         <h2>All Products</h2>
         <button class="glow-btn"> <a href="addproduct.php"> + Add Product</a></button>
       </div>

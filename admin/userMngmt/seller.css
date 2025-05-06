@@ -31,6 +31,7 @@ body {
 }
 
 .add-user-btn {
+  text-decoration: none;
   background-color: #1f1f1f;
   color: #00ffea;
   border: 2px solid #00ffea;
@@ -42,7 +43,9 @@ body {
   box-shadow: 0 0 8px #00ffea, 0 0 15px #00ffea inset;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
-
+.add-user-btn a{
+  text-decoration: none;
+}
 .add-user-btn:hover {
   background-color: #00ffea;
   color: #121212;
@@ -131,6 +134,7 @@ body {
 }
 /* Delete Button */
 .delete-btn {
+  text-decoration: none;
   color: #ff4c4c;
   border-color: #ff4c4c;
   text-shadow: 0 0 5px #ff4c4c;
@@ -141,4 +145,14 @@ body {
   background-color: #ff4c4c;
   color: #121212;
   box-shadow: 0 0 12px #ff4c4c, 0 0 24px #ff4c4c;
+}
+.delete-btn a{
+  text-decoration: none;
+}
+.back-btn{
+  text-decoration: none;
+  color: #4cfcff;
+ height: 40px;
+ width: 130px;
+ border-radius: 10px;
 }

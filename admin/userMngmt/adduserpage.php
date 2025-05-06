@@ -1,116 +1,159 @@
+<?php
+$host = "localhost";
+$user = "root";
+$password = "bUZweTz8ms_V&w/"; // Replace with your actual MySQL password
+$database = "Eshop";
+
+// Create connection
+$conn = new mysqli($host, $user, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Initialize variables
+$first_name = $father_name = $username = $email = $password = $phone = $address = "";
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and validate inputs
+    $first_name = trim($_POST["first_name"]);
+    $father_name = trim($_POST["father_name"]);
+    $username = trim($_POST["username"]);
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
+    $phone = trim($_POST["phone"]);
+    $address = trim($_POST["address"]);
+
+    // Check for existing username or email
+    if (empty($errors)) {
+        $stmt = $conn->prepare("SELECT * FROM sellers WHERE first_name = ? OR email = ?");
+        $stmt->bind_param("ss", $username, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $errors[] = "Username or email already exists.";
+        }
+        $stmt->close();
+    }
+
+    // If no errors, insert into database
+    if (empty($errors)) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("INSERT INTO sellers (first_name, father_name, username, email, password, phone, address) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $first_name, $father_name, $username, $email, $hashed_password, $phone, $address);
+        if ($stmt->execute()) {
+            $success_message = "Registration successful!";
+            header("Location:  user.php");
+            // Clear form values
+            $first_name = $father_name = $username = $email = $password = $phone = $address = "";
+        } else {
+            $errors[] = "Error: " . $stmt->error;
+        }
+        $stmt->close();
+    }
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Input Form</title>
+    <title>Seller Sign Up</title>
     <style>
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
             font-family: Arial, sans-serif;
+            background: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
-        .form-container {
-            background-color: #2a2a2a;
-            padding: 2rem;
+        .signup-form {
+            background: #fff;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            width: 100%;
-            max-width: 400px;
+            box-shadow: 0 0 10px #ccc;
+            width: 400px;
         }
-
-        h2 {
+        .signup-form h2 {
             text-align: center;
-            margin-bottom: 1.5rem;
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 20px;
         }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="file"] {
+        .signup-form input, .signup-form textarea {
             width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #00ffff;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #3a3a3a;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: box-shadow 0.3s ease;
         }
-        input:focus {
-            outline: none;
-            box-shadow: 0 0 10px #00ffff;
-        }
-
-        input[type="file"] {
-            padding: 0.5rem;
-        }
-
-        button {
+        .signup-form button {
             width: 100%;
-            padding: 1rem;
-            background-color: #00ffff;
+            padding: 10px;
+            background: #007bff;
             border: none;
+            color: #fff;
             border-radius: 5px;
-            color: #1a1a1a;
-            font-size: 1.2rem;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
         }
-
-        button:hover {
-            background-color: #00cccc;
-            box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
-            transform: scale(1.05);
+        .signup-form button:hover {
+            background: #0056b3;
         }
-
-        button:active {
-            transform: scale(0.95);
+        .error {
+            background: #f2dede;
+            color: #a94442;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #dff0d8;
+            color: #3c763d;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .login-link a:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Product Input Form</h2>
-        <form action="addusertodb.php" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="Name">full Name</label>
-                <input type="text" id="Name" name="Name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email"  required>
-            </div>
-            <div class="form-group">
-                <label for="image">photo</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label for="password">password</label>
-                <input type="password" id="password" name="password"  required>
-            </div>
-            
-            <button type="submit" name="submit">Submit</button>
-        </form>
-    </div>
+    <form class="signup-form" method="post" action="">
+        <h2>Add seller</h2>
+        <?php
+        if (!empty($errors)) {
+            echo '<div class="error"><ul>';
+            foreach ($errors as $error) {
+                echo "<li>" . htmlspecialchars($error) . "</li>";
+            }
+            echo '</ul></div>';
+        }
+        if (isset($success_message)) {
+            echo '<div class="success">' . htmlspecialchars($success_message) . '</div>';
+        }
+        ?>
+        <input type="text" name="first_name" placeholder="First Name" value="<?php echo htmlspecialchars($first_name); ?>" required />
+        <input type="text" name="father_name" placeholder="Father Name" value="<?php echo htmlspecialchars($father_name); ?>" required />
+        <input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>" required />
+        <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <input type="text" name="phone" placeholder="Phone" value="<?php echo htmlspecialchars($phone); ?>" />
+        <textarea name="address" placeholder="Address"><?php echo htmlspecialchars($address);?></textarea>
+        <button type="submit">Add sller</button>
+    </form>
 </body>
 </html>
