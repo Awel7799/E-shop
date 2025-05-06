@@ -11,42 +11,63 @@
   <div class="order-section">
 
     <div class="order-header">
+      <button class="back-btn"><a href="../dashboard/index.php">BACK</a></button>
       <h2>Orders</h2>
       <div class="order-count">
-        Total Orders: <span>5</span>
-      </div>
+    Total Orders: <span>
+    <?php 
+        $conn = new mysqli("localhost", "root", "bUZweTz8ms_V&w/", "eshop");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM cart";
+        $result = $conn->query($sql);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            echo $row['total'];
+        } else {
+            echo "0";
+        }
+
+        $conn->close();
+    ?>
+    </span>
+</div>
+
     </div>
 
     <div class="order-cards">
-      <div class="order-card">
-        <img src="https://via.placeholder.com/100" alt="Ordered Product">
-        <h3>Product Name 1</h3>
-        <p class="price">$29.99</p>
-      </div>
+     
 
-      <div class="order-card">
-        <img src="https://via.placeholder.com/100" alt="Ordered Product">
-        <h3>Product Name 2</h3>
-        <p class="price">$49.99</p>
-      </div>
+    <?php
+      $conn = new mysqli("localhost", "root", "bUZweTz8ms_V&w/", "eshop");
 
-      <div class="order-card">
-        <img src="https://via.placeholder.com/100" alt="Ordered Product">
-        <h3>Product Name 3</h3>
-        <p class="price">$19.99</p>
-      </div>
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
 
-      <div class="order-card">
-        <img src="https://via.placeholder.com/100" alt="Ordered Product">
-        <h3>Product Name 4</h3>
-        <p class="price">$59.99</p>
-      </div>
+      $sql = "SELECT * FROM cart";
+      $result = $conn->query($sql);
 
-      <div class="order-card">
-        <img src="https://via.placeholder.com/100" alt="Ordered Product">
-        <h3>Product Name 5</h3>
-        <p class="price">$34.99</p>
-      </div>
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo '<div class="cart-card">';
+          echo '<img src="../../storage/uploads/' . htmlspecialchars($row["product_image"]) . '" alt="Product Image">';
+          echo '<div class="card-content">';
+          echo '<h2>' . htmlspecialchars($row["product_name"]) . '</h2>';
+          echo '<p>Price: $' . htmlspecialchars($row["product_price"]) . '</p>';
+          echo '<p>Quantity: ' . htmlspecialchars($row["quantity"]) . '</p>';
+          echo '</div>';
+          echo '</div>';
+        }
+      } else {
+        echo '<p class="empty-message">Your cart is empty.</p>';
+      }
+
+      $conn->close();
+    ?>
 
       <!-- More order cards if needed -->
     </div>

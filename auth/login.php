@@ -1,4 +1,6 @@
 <?php
+session_start(); // ✅ Must be at the very top
+
 $servername = "localhost";
 $dbUsername = "root";
 $dbPassword = "bUZweTz8ms_V&w/";
@@ -28,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
 
-            // Check plain password (ideally use password_verify for hashed passwords)
+            // ✅ Check plain password (but password_hash/verify is better for production)
             if ($password === $row['password']) {
-                // Start session if needed
-                session_start();
-                $_SESSION['admin'] = $row['username'];
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_username'] = $row['username'];
 
+                // ✅ Redirect to dashboard
                 header("Location: ../admin/dashboard/index.php");
                 exit();
             } else {
@@ -53,4 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
+
+// ❌ REMOVE this:
+// session_destroy();
 ?>

@@ -1,10 +1,20 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    // Redirect to login page if not logged in
+    header("Location: ../../login_page.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="admin-dashboard">
@@ -12,11 +22,11 @@
     <aside class="sidebar">
       <h2>Admin</h2>
       <nav>
-        <a href="#">Dashboard</a> <br>
-        <a href="../userMngmt/user.php">Users</a> <br>
-        <a href="../product/product.php">Products</a> <br>
-        <a href="../ordereditem/order.php">Orders</a> <br>
-        <a href="#">Reports</a> <br>
+        <a href="#">Dashboard</a> <br><br><br>
+        <a href="../userMngmt/user.php">Users</a> <br><br><br>
+        <a href="../product/product.php">Products</a> <br><br><br>
+        <a href="../ordereditem/order.php">Orders</a> <br><br><br>
+        <a href="#">Reports</a> <br><br><br>
         <a href="#">Settings</a>
       </nav>
     </aside>
@@ -25,10 +35,63 @@
     <main class="main-content">
       <!-- Overview Cards -->
       <section class="overview">
-        <div class="card">Total Users: 1234</div>
-        <div class="card">Products: 567</div>
-        <div class="card">Sales: $89,000</div>
-        <div class="card">Orders: 340</div>
+        <div class="card">Total sellers: <?php 
+        $conn = new mysqli("localhost", "root", "bUZweTz8ms_V&w/", "eshop");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM sellers";
+        $result = $conn->query($sql);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            echo $row['total'];
+        } else {
+            echo "0";
+        }
+
+        $conn->close();
+    ?></div>
+        <div class="card">Products:  <?php 
+        $conn = new mysqli("localhost", "root", "bUZweTz8ms_V&w/", "eshop");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM products";
+        $result = $conn->query($sql);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            echo $row['total'];
+        } else {
+            echo "0";
+        }
+
+        $conn->close();
+    ?></div>
+        
+        <div class="card">Orders:  <?php 
+        $conn = new mysqli("localhost", "root", "bUZweTz8ms_V&w/", "eshop");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM cart";
+        $result = $conn->query($sql);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            echo $row['total'];
+        } else {
+            echo "0";
+        }
+
+        $conn->close();
+    ?></div>
+    <a href="../../auth/logout.php">Logout</a>
+
       </section>
 
       <!-- Table View -->

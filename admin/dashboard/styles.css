@@ -30,11 +30,20 @@
     color: #0f0;
     margin-bottom: 20px;
   }
-  
+  .sidebar nav{
+    height: 500px;
+    padding-top: 50px;
+    padding-left: 30px;
+    margin-top: 10px;
+    
+  }
   .sidebar nav a {
+    
+    height: 100px;
+    margin-top: 60px;
+    padding: 10px;
     color: #ccc;
     text-decoration: none;
-    margin: 10px 0;
     transition: color 0.3s;
   }
   
