@@ -32,7 +32,7 @@ function addToCart(id, name, price, image) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-shop</title>
-    <link rel="stylesheet" href="homepagestyle.css">
+    <link rel="stylesheet" href="homepagestyles.css">
     <link rel="stylesheet" href="query.css">
     <link rel="stylesheet" href="humberger.css">
 </head>
@@ -78,7 +78,7 @@ function addToCart(id, name, price, image) {
             <a class="hidden-tab" href="#footer">ABOUT</a>
             <a class="hidden-tab" href="#footer">CONTACT</a>
             <a class="hidden-tab3" href="cart.php"><img src="./assets/icons/shop.png" alt=""></a>
-            <a class="hidden-tab3" href=" ../auth/signup.php"><img src="./assets/icons/person.png" alt=""><p>Admin</p></a>
+            <a class="hidden-tab3" href=" ../auth/login_page.php"><img src="./assets/icons/person.png" alt=""><p>Admin</p></a>
             <a class="hidden-tab3" href=" ../seller/login.php"><img src="./assets/icons/person.png" alt=""><p>Seller</p></a>
         </div>   
     </header>
@@ -99,7 +99,6 @@ function addToCart(id, name, price, image) {
 
 <section class="featured-products">
     <h1 class="line">Featured Products</h1>
-
     <div class="list wrap">
         
         <?php
@@ -156,32 +155,64 @@ function addToCart(id, name, price, image) {
     <h1 class="line">Latest Products</h1>
 
     <div class="list wrap">
-        <div class="item-cards"> 
-            <img src="./assets/images/perfume.png" alt="">
+    <?php
+$servername = "localhost";
+$dbUsername = "root";
+$dbPassword = "bUZweTz8ms_V&w/";
+$dbName = "eshop";
 
-            <div class="top">Veleno Perfume</div>
-            <div class="middle">Veleno perfume, 100ml</div>
-            <div class="bottom"><p><span>28000</span> MMK</p> <button>+</button></div>
-        </div>
+// Create connection
+$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
 
-        
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+/*
+// Fetch discounted products
+$sql = "SELECT * FROM discount ORDER BY id DESC";
+$result = $conn->query($sql);
 
-        <div class="item-cards"> 
-            <img src="./assets/images/hoodie.png" alt="">
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    echo '<div class="product-card">';
+    echo '<img src="' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+    echo '<h3>' . htmlspecialchars($row["name"]) . '</h3>';
+    echo '<p class="price">$' . htmlspecialchars($row["price"]) . '</p>';
+    echo '<p class="discount-dates">From: ' . htmlspecialchars($row["start_date"]) . '<br>To: ' . htmlspecialchars($row["end_date"]) . '</p>';
+    echo '<a href="discount_delete.php?id=' . $row["id"] . '" onclick="return confirm(\'Are you sure you want to delete this product?\')" class="delete-btn">Delete</a>';
+    echo '</div>';
+  }
+} else {
+  echo '<p>No products found.</p>';
+}
+  */
+  $sql = "SELECT * FROM discount";
+  $result = $conn->query($sql);
 
-            <div class="top">Essential Hoodie</div>
-            <div class="middle">Buttercream Essential Hoodie</div>
-            <div class="bottom"><p><span>3700000</span> MMK</p> <button>+</button></div>
-        </div>
-        <div class="item-cards"> 
-            <img src="./assets/images/allstr.png" alt="">
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo '<div class="item-cards">';
+           echo '<img src="/E-shop/storage/uploads/' . htmlspecialchars($row["image"]) . '" alt="Product Image">';
+           echo '<div class="middle">' . htmlspecialchars($row["name"]) . '</div>';
+           echo '<div class="item-cards-price">';
+           echo '<div class="bottom"><p><span>' . htmlspecialchars($row["price"]) . '</span>$ </p></div>';
+           echo '<p class="discount-dates">From: ' . htmlspecialchars($row["start_date"]) . '<br>To: ' . htmlspecialchars($row["end_date"]) . '</p>';
+           echo '<button onclick="addToCart(' 
+               . htmlspecialchars($row["id"]) . ', '
+               . '\'' . addslashes($row["name"]) . '\', '
+               . htmlspecialchars($row["price"]) . ', '
+               . '\'' . addslashes($row["image"]) . '\')">+</button>';
+ 
+      echo '</div>';
+      echo '</div>';
+    }
+  } else {
+    echo '<p>No products found.</p>';
+  }
 
-            <div class="top">Converse Shoes</div>
-            <div class="middle">
-               <p>Chuck Tylor All Star Trek </p>
-            </div>
-            <div class="bottom"><p><span>5400000</span> MMK</p> <button>+</button></div>
-        </div>
+$conn->close();
+?>
 
 
     </div>

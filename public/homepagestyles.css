@@ -180,7 +180,7 @@ header .links{
 
 .featured-products{
     margin:  4% 0;
-    height: 1000px;
+    height: auto;
     width: 100vw;
     
 }
@@ -197,7 +197,6 @@ header .links{
 }
 
 .featured-products .list{
-    border: 1px solid black;
     flex-wrap: wrap;
     gap: 20px;
     top: 20%;
@@ -206,62 +205,10 @@ header .links{
     display: flex;
     justify-content: space-around;
 }
-
-.featured-products .list .item-cards{
-    border: 1px solid black;
-    flex: 1 1 calc(25% - 20px);
-    width: 15%;
-    border-radius: 50px;
-    box-shadow: 2px 5px 10px 0px  #888888e4;
-}
-
-.featured-products .list .item-cards img{
-    width: 100.5%;
-}
-
-.featured-products .list .item-cards div{
-    margin-inline: 6%;
-}
-
-.featured-products .list .item-cards .top{
-    font-size: 100%;
-    font-weight: 600;
-}
-.featured-products .list .item-cards .middle{
-    color: gray;
-    word-wrap: no-wrap;
-}
-
-.featured-products .list .item-cards .bottom{
-   
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 6%;
-}
-
-.featured-products .list .item-cards button{
-    border: none;
-    border-radius: 50%;
-    width: 20%;
-    aspect-ratio: 1;
-    font-size: 1em;
-    color: #fff;
-    background-color: #A51910;
-}
-
-.featured-products .list .item-cards .bottom span{
-    color: #A51910;
-}
-
 /* Container */
 #list{
-    border: 2px solid rgb(194, 22, 22);
     position: relative;
-    left: -300px;
+    left: -100px;
     width: 80%;
 }
 .featured-products .list {
@@ -422,6 +369,8 @@ header .links{
 }
 
 footer{
+    position: absolute;
+    top:110%;
     height: max-content;
     background-color: rgb(48, 47, 47);
 }

@@ -32,8 +32,9 @@ body{
 }
 
 .body .left .categories{
-    position: fixed;
-    top: 200px;
+    background-color: aqua;
+    position: relative;
+    top: 50px;
     width: 75%;
     /* background-color: blue; */
     border-top-right-radius: 100Px;
@@ -53,7 +54,9 @@ body{
 .body .left .categories li{
     margin-inline: auto;
 }
-
+.body .left .categories li a{
+    text-decoration: none;
+}
 .body .left .categories h2{
     margin: 2em 0;
     width: 100%;

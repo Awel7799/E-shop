@@ -34,6 +34,7 @@
   }
   
   .glow-btn {
+    text-decoration: none;
     background: transparent;
     color: #00ffea;
     border: 2px solid #00ffea;
@@ -45,7 +46,9 @@
     box-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea inset;
     transition: background 0.3s, box-shadow 0.3s;
   }
-  
+  .glow-btn a{
+    text-decoration: none;
+  }
   .glow-btn:hover {
     background-color: #00ffea;
     color: #121212;
@@ -88,6 +91,9 @@
   }
   
   .delete-btn {
+    position: relative;
+    top: 6px;
+    text-decoration: none;
     background: transparent;
     color: #ff4c4c;
     border: 2px solid #ff4c4c;

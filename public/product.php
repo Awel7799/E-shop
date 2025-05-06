@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
-    <link rel="stylesheet" href="product.css">
-    <link rel="stylesheet" href="homepagestyle.css">
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="homepagestyles.css">
     <link rel="stylesheet" href="query.css">
 </head>
 <body>
@@ -20,10 +20,9 @@
     <div class="links">
             <a class="hidden-tab"  href="index.php">HOME</a>
             <a class="active hidden-tab" href="products.php">PRODUCT</a>
-            <a class="hidden-tab" href="#">ABOUT</a>
-            <a class="hidden-tab" href="#">CONTACT</a>
-            <a class="hidden-tab3" href="#"><img src="./assets/icons/shop.png" alt=""></a>
-            <a class="hidden-tab3" href="#"><img src="./assets/icons/person.png" alt=""></a>
+            <a class="hidden-tab" href="footer">ABOUT</a>
+            <a class="hidden-tab" href="footer">CONTACT</a>
+            <a class="hidden-tab3" href="cart.php"><img src="./assets/icons/shop.png" alt=""></a>
     </div>   
 </header>
 
@@ -50,7 +49,7 @@
 <div class="right">
         <h1><span class="line">All Products</span></h1>
 <section class="featured-products">
-    <h1 class="line">Featured Products</h1>
+    <h1 class="line"></h1>
 
     <div id="list" class="list wrap">
         
@@ -178,7 +177,7 @@ $conn->close();
     </div>
     <hr>
     <div class="bottom">
-        Copyright ©2023 <span>E-SHOP</span>. All right reserved
+        Copyright ©2025 <span>E-SHOP</span>. All right reserved
     </div>
     <hr>
 </footer>

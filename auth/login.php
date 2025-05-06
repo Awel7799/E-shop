@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";      // usually localhost
-$dbUsername = "root";           // your DB username
-$dbPassword = "bUZweTz8ms_V&w/";               // your DB password
-$dbName = "eshop"; // replace with your database name
+$servername = "localhost";
+$dbUsername = "root";
+$dbPassword = "bUZweTz8ms_V&w/";
+$dbName = "eshop";
 
 // Create connection
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
@@ -11,36 +11,45 @@ $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-else {
-    echo "✅ Database connection successful!";
-}
 
-// Check if form data exists first to avoid undefined warnings
-if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
-    // get value from the form
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password']; // don't forget password
-}
-// Search for the user with that email
-$sql = "SELECT * FROM users WHERE email = '$email'";
-$result = $conn->query($sql);
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!empty($_POST['username']) && !empty($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-if ($result->num_rows > 0) {
-    // Email found
-    $row = $result->fetch_assoc();
-    $stored_password = $row['password']; // password from DB
+        // Use prepared statement to prevent SQL injection
+        $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
 
-    // Compare passwords
-    if ($password === $stored_password) {
-        header("Location:../admin/dashboard/index.php");
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
+
+            // Check plain password (ideally use password_verify for hashed passwords)
+            if ($password === $row['password']) {
+                // Start session if needed
+                session_start();
+                $_SESSION['admin'] = $row['username'];
+
+                header("Location: ../admin/dashboard/index.php");
+                exit();
+            } else {
+                header("Location: login_page.php?error=Incorrect password");
+                exit();
+            }
+        } else {
+            header("Location: login_page.php?error=No user found with that username");
+            exit();
+        }
+
+        $stmt->close();
     } else {
-        header("Location: login_page.php?error=incorrect_password");
+        header("Location: login_page.php?error=Missing fields");
         exit();
     }
-} else {
-    header("Location: login_page.php?error=No user found with that email");
-    exit();
 }
 
 $conn->close();
