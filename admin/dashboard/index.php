@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     // Redirect to login page if not logged in
-    header("Location: ../../login_page.php");
+    header("Location: ../../auth/login_page.php");
     exit();
 }
 ?>
@@ -23,11 +23,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
       <h2>Admin</h2>
       <nav>
         <a href="#">Dashboard</a> <br><br><br>
-        <a href="../userMngmt/user.php">Users</a> <br><br><br>
+        <a href="../userMngmt/user.php">seller</a> <br><br><br>
         <a href="../product/product.php">Products</a> <br><br><br>
         <a href="../ordereditem/order.php">Orders</a> <br><br><br>
-        <a href="#">Reports</a> <br><br><br>
-        <a href="#">Settings</a>
       </nav>
     </aside>
 
@@ -91,6 +89,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         $conn->close();
     ?></div>
     <a href="../../auth/logout.php">Logout</a>
+    <a href="../../public/index.php">back to home</a>
 
       </section>
 

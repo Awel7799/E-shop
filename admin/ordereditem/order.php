@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    // Redirect to login page if not logged in
+    header("Location: ../../auth/login_page.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

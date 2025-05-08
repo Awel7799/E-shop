@@ -261,7 +261,7 @@ $conn->close();
     </div>
     <hr>
     <div class="bottom">
-        Copyright ©2023 <span>E-SHOP</span>. All right reserved
+        Copyright ©2025 <span>E-SHOP</span>. All right reserved
     </div>
     hr
 </footer>

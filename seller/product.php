@@ -153,6 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
+    <button><a href="login.php">LOG OUT</a></button>
         <h2>Add New Product</h2>
         <?php if (!empty($success_msg)) echo "<p class='success'>$success_msg</p>"; ?>
         <?php if (!empty($error_msg)) echo "<p class='error'>$error_msg</p>"; ?>
